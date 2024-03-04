@@ -2,7 +2,7 @@
 #include <vector>
 #include <queue>
 #include <algorithm>
-#include <iostream>
+
 using namespace std;
 
 int visit[20001]={0,};
@@ -15,23 +15,21 @@ void BFS(int start)
     visit[start]=1;
     
     int cnt=0;
-    while(!q.empty())
+    while(!q.empty()) //큐가 빌 때까지
     {
-        int a = q.front();
+        int cur = q.front();
         q.pop();
-        for(int i=0; i<graph[a].size();i++)
+        for(int i=0; i<graph[cur].size();i++)
         {
-            int b = graph[a][i];
-            if(visit[b]==0)
+            int next = graph[cur][i];
+            if(visit[next]==0) //방문하지 않은 정점
             {
-                visit[b]=visit[a]+1;
-                q.push(b);
+                visit[next]=visit[cur]+1; // 이전 정점까지의 거리 +1
+                q.push(next); //다음정점 큐에 넣기
                  
             }
-            
         }
     }
-    
 }
 int solution(int n, vector<vector<int>> edge) {
     int answer = 0;
